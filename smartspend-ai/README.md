@@ -81,7 +81,8 @@ smartspend-ai/
 ### Installation
 
 ```bash
-git clone <your-repository-url>
+
+git clone https://github.com/brindhasri99/smartspend-ai.git
 cd smartspend-ai
 npm run install-all
 ```
