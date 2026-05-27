@@ -1,57 +1,77 @@
 # SmartSpend AI
 
-SmartSpend AI is a MERN fintech dashboard for persistent personal finance tracking. It includes JWT authentication, user-specific MongoDB storage, transaction CRUD, CSV import, OCR receipt scanning, AI-assisted transaction entry, analytics, budget signals, and a premium responsive React interface.
+SmartSpend AI is a MERN personal finance dashboard with JWT authentication, MongoDB-backed transaction storage, CSV import, receipt OCR, AI-assisted transaction entry, and analytics.
 
-## Highlights
-
-- Secure signup, login, logout, protected routes, and session refresh with JWT
-- MongoDB persistence for every user's income, expenses, budgets, and profile preferences
-- Premium SaaS dashboard with dark/light mode, glass panels, responsive sidebar, skeleton states, and toast notifications
-- Transaction ledger with add, edit, delete, search, type/category filters, and CSV export
-- Analytics powered by Recharts: income vs expense, category split, weekly spending, and savings trend
-- AI features: natural language transaction capture, category guessing, insights, budget usage, and overspending alerts
-- Browser OCR receipt scanner using Tesseract.js
-- Express MVC-style backend with protected REST routes, validation, pagination/filtering, and centralized error handling
-
-## Tech Stack
-
-- Frontend: React.js, Tailwind CSS, Axios, Recharts, React Icons, Tesseract.js
-- Backend: Node.js, Express.js, MongoDB, Mongoose
-- Auth: JWT and bcryptjs
-- AI: Gemini API with local rule-based fallback
-
-## Folder Structure
+## Project Structure
 
 ```text
 smartspend-ai/
   client/
+    public/
     src/
-      api/          Axios client and auth interceptor
-      components/   Dashboard, chart, form, and UI building blocks
-      context/      Auth and toast providers
-      pages/        App routes
-      utils/        Formatting, CSV, receipt parsing helpers
+      api/          Shared Axios client
+      assets/       Images and static frontend assets
+      components/   Reusable UI components
+      context/      React providers
+      hooks/        Reusable React hooks
+      layouts/      Route shells and app layouts
+      pages/        Route-level screens
+      services/     Frontend business/data services
+      styles/       Global styles and Tailwind layers
+      utils/        Formatting, CSV, and receipt helpers
+      App.jsx
+      main.jsx
   server/
-    config/         MongoDB connection
-    controllers/    Auth, expense, and AI route logic
-    middleware/     JWT protection
-    models/         User and transaction schemas
-    routes/         REST API routes
-    utils/          AI/category parsing helpers
+    config/         Database and runtime configuration
+    controllers/    Request handlers
+    middleware/     Express middleware
+    models/         Mongoose schemas
+    routes/         REST route definitions
+    services/       Backend business integrations
+    utils/          Shared backend helpers
+    validations/    Request validation schemas
+    server.js
 ```
 
-## Run Locally
+## Setup
+
+Install dependencies from the project root:
 
 ```bash
 npm run install-all
+```
+
+Create environment files:
+
+```bash
 cp .env.example .env
+cp client/.env.example client/.env
+```
+
+Update `.env` with your MongoDB URI, JWT secret, and optional Gemini API key.
+
+## Run Locally
+
+Start backend and frontend together:
+
+```bash
 npm run dev
 ```
 
+Run each side separately:
+
+```bash
+npm run server
+npm run client
+```
+
 Frontend: `http://localhost:3000`
+
 Backend: `http://localhost:5000`
 
-## Environment
+## Environment Files
+
+Backend variables live in `.env` at the project root:
 
 ```env
 PORT=5000
@@ -60,7 +80,21 @@ JWT_SECRET=change_this_for_local_project
 GEMINI_API_KEY=
 ```
 
-`GEMINI_API_KEY` is optional. Without it, SmartSpend AI still parses common expense sentences with local rules.
+Frontend variables live in `client/.env`:
+
+```env
+REACT_APP_API_URL=http://localhost:5000/api
+```
+
+## Useful Scripts
+
+```bash
+npm run dev          # Run API and React app together
+npm run server       # Run Express API with nodemon
+npm start            # Run Express API with node
+npm run client       # Run React app
+npm run install-all  # Install root and client dependencies
+```
 
 ## API Routes
 
@@ -77,3 +111,10 @@ GEMINI_API_KEY=
 - `POST /api/ai/create`
 - `POST /api/ai/parse`
 - `GET /api/ai/insights`
+
+## Scalability Notes
+
+- Keep route handlers thin by moving reusable business logic into `server/services`.
+- Add request schemas in `server/validations` before controllers grow more complex.
+- Keep shared frontend API calls in `client/src/api` or `client/src/services` instead of calling Axios directly from pages.
+- Add feature folders only when a domain becomes large enough to justify grouping page, component, hook, and service files together.

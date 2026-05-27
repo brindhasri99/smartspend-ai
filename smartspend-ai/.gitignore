@@ -1,7 +1,12 @@
 node_modules/
 client/node_modules/
 client/build/
+coverage/
+client/coverage/
+server/uploads/
 .env
+*.env.local
 client/.env
 npm-debug.log*
+.dev-server*.log
 .DS_Store
