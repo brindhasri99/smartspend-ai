@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: #f1f5f9;
+  color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: none;
+}
+
+body::after {
+  content: none;
+}
+
+.dark body {
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+.light body::before {
+  content: none;
+}
+
+.app-shell {
+  min-height: 100vh;
+  background: #f1f5f9;
+}
+
+.dark .app-shell {
+  background: #0f172a;
+}
+
+.glass-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 8px 24px -20px rgba(15, 23, 42, 0.35);
+}
+
+.dark .glass-card {
+  border-color: #1e293b;
+  background: #111827;
+  box-shadow: none;
+}
+
+.panel {
+  @apply glass-card p-5 transition hover:shadow-md;
+}
+
+.form-input {
+  @apply w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100;
+}
+
+.dark .form-input {
+  @apply border-slate-700 bg-slate-950 text-slate-100 placeholder:text-slate-500 focus:border-emerald-500 focus:ring-emerald-950;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-60;
+}
+
+.btn-light {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50;
+}
+
+.dark .btn-light {
+  @apply border-slate-700 bg-slate-900 text-slate-200 hover:bg-slate-800;
+}
+
+.badge {
+  @apply inline-flex items-center gap-1 rounded-full border border-emerald-100 bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700;
+}
+
+.dark .badge {
+  @apply border-emerald-900 bg-emerald-950/40 text-emerald-300;
+}
+
+.toast {
+  @apply flex min-w-72 items-center gap-3 rounded-lg border border-emerald-100 bg-white px-4 py-3 text-sm text-slate-800 shadow-lg;
+}
+
+.dark .toast {
+  @apply border-slate-700 bg-slate-900 text-slate-100;
+}
+
+.toast-error {
+  @apply border-red-200;
+}
+
+.skeleton {
+  @apply animate-pulse rounded-lg bg-slate-200;
+}
+
+.dark .skeleton {
+  @apply bg-slate-800;
+}
