@@ -28,8 +28,8 @@ export default function Transactions() {
   };
 
   useEffect(() => {
-    loadItems();
-  }, [query]);
+  loadItems();
+}, [loadItems]);
 
   const saveExpense = async (form) => {
     if (editing) {
